@@ -1,0 +1,26 @@
+========================================
+ LSFL PRODUCTION HEALTH CHECK
+ Tue Oct  6 18:19:15 CDT 2026
+========================================
+
+[1] Customer Portal
+STATUS: HEALTHY
+HTTP:   200
+
+[2] Docker Container
+STATUS: RUNNING
+
+[3] Container Health
+HEALTH: healthy
+
+[4] Host Uptime
+18:19  up 571 days, 16:37, 2 users, load averages: 1.49 1.81 2.43
+
+[5] Disk Usage
+Filesystem        Size    Used   Avail Capacity iused ifree %iused  Mounted on
+/dev/disk3s1s1   228Gi    17Gi    63Gi    22%    412k  657M    0%   /
+
+========================================
+ Monitoring check completed
+========================================
+
