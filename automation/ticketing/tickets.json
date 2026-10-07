@@ -1,0 +1,68 @@
+[
+  {
+    "id": "INC-1001",
+    "title": "High CPU Utilization",
+    "type": "high_cpu",
+    "service": "Linux Host",
+    "severity": "SEV-3",
+    "status": "OPEN",
+    "detected_at": "2026-10-07T16:32:26.581582-05:00",
+    "detection_source": "Incident Simulator",
+    "symptoms": [
+      "CPU utilization above threshold",
+      "System response time degraded",
+      "One or more processes consuming excessive CPU"
+    ],
+    "timeline": [],
+    "root_cause": null,
+    "remediation": null,
+    "resolved_at": null
+  },
+  {
+    "id": "INC-1002",
+    "title": "Customer Portal Container Failure",
+    "type": "container_failure",
+    "service": "Customer Portal",
+    "severity": "SEV-2",
+    "status": "OPEN",
+    "detected_at": "2026-10-07T16:32:48.919749-05:00",
+    "detection_source": "Incident Simulator",
+    "symptoms": [
+      "Customer portal unavailable",
+      "HTTP connection failure",
+      "Container is not running"
+    ],
+    "timeline": [],
+    "root_cause": null,
+    "remediation": null,
+    "resolved_at": null
+  },
+  {
+    "id": "INC-1003",
+    "title": "NGINX Web Service Failure",
+    "type": "nginx_failure",
+    "service": "Customer Portal",
+    "severity": "SEV-2",
+    "status": "INVESTIGATING",
+    "detected_at": "2026-10-07T16:33:14.695690-05:00",
+    "detection_source": "Incident Simulator",
+    "symptoms": [
+      "Customer portal unavailable",
+      "HTTP 502 or connection failure",
+      "NGINX service is not responding"
+    ],
+    "timeline": [
+      {
+        "timestamp": "2026-10-07T16:41:30.877976-05:00",
+        "event": "Status changed: OPEN -> INVESTIGATING"
+      },
+      {
+        "timestamp": "2026-10-07T16:41:35.873339-05:00",
+        "event": "Engineer began investigation"
+      }
+    ],
+    "root_cause": null,
+    "remediation": null,
+    "resolved_at": null
+  }
+]

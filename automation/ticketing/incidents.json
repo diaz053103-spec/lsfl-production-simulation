@@ -1,0 +1,68 @@
+[
+  {
+    "type": "container_failure",
+    "title": "Customer Portal Container Failure",
+    "service": "Customer Portal",
+    "severity": "SEV-2",
+    "symptoms": [
+      "Customer portal unavailable",
+      "HTTP connection failure",
+      "Container is not running"
+    ]
+  },
+  {
+    "type": "nginx_failure",
+    "title": "NGINX Web Service Failure",
+    "service": "Customer Portal",
+    "severity": "SEV-2",
+    "symptoms": [
+      "Customer portal unavailable",
+      "HTTP 502 or connection failure",
+      "NGINX service is not responding"
+    ]
+  },
+  {
+    "type": "bad_deployment",
+    "title": "Failed Application Deployment",
+    "service": "Customer Portal",
+    "severity": "SEV-2",
+    "symptoms": [
+      "New deployment fails health checks",
+      "Application unavailable after deployment",
+      "Previous version may require rollback"
+    ]
+  },
+  {
+    "type": "high_disk_usage",
+    "title": "High Disk Utilization",
+    "service": "Linux Host",
+    "severity": "SEV-3",
+    "symptoms": [
+      "Disk utilization above threshold",
+      "Application performance may degrade",
+      "Log files consuming excessive space"
+    ]
+  },
+  {
+    "type": "high_cpu",
+    "title": "High CPU Utilization",
+    "service": "Linux Host",
+    "severity": "SEV-3",
+    "symptoms": [
+      "CPU utilization above threshold",
+      "System response time degraded",
+      "One or more processes consuming excessive CPU"
+    ]
+  },
+  {
+    "type": "health_check_failure",
+    "title": "Customer Portal Health Check Failure",
+    "service": "Monitoring",
+    "severity": "SEV-2",
+    "symptoms": [
+      "Automated health check failed",
+      "Expected HTTP 200 response not received",
+      "Customer portal may be unavailable"
+    ]
+  }
+]
