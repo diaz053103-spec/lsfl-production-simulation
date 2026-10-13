@@ -64,5 +64,89 @@
     "root_cause": null,
     "remediation": null,
     "resolved_at": null
+  },
+  {
+    "id": "INC-1004",
+    "title": "Customer Portal Container Failure",
+    "type": "container_failure",
+    "service": "Customer Portal",
+    "severity": "SEV-2",
+    "status": "RESOLVED",
+    "detected_at": "2026-10-13T17:12:49.319217-05:00",
+    "detection_source": "Incident Simulator",
+    "symptoms": [
+      "Customer portal unavailable",
+      "HTTP connection failure",
+      "Container is not running"
+    ],
+    "timeline": [
+      {
+        "timestamp": "2026-10-13T17:12:49.319217-05:00",
+        "event": "Incident created"
+      },
+      {
+        "timestamp": "2026-10-13T17:13:01.175517-05:00",
+        "event": "Status changed: OPEN -> INVESTIGATING"
+      },
+      {
+        "timestamp": "2026-10-13T17:13:01.217118-05:00",
+        "event": "Baseline confirmed: portal returned HTTP 200; Docker container was running and healthy before failure injection."
+      },
+      {
+        "timestamp": "2026-10-13T17:24:44.598359-05:00",
+        "event": "Detection: health_check.sh returned UNHEALTHY (HTTP 000); curl could not connect to localhost:8080."
+      },
+      {
+        "timestamp": "2026-10-13T17:24:44.638214-05:00",
+        "event": "Investigation: Docker inspection showed container status exited with exit code 0. Container logs showed NGINX workers and master process exiting, consistent with the intentional container stop."
+      },
+      {
+        "timestamp": "2026-10-13T17:24:44.677404-05:00",
+        "event": "Recovery initiated: restarting the customer portal container."
+      },
+      {
+        "timestamp": "2026-10-13T17:28:02.176306-05:00",
+        "event": "Recovery verified: container is running and healthy; portal returned HTTP 200; health_check.sh reported HEALTHY."
+      },
+      {
+        "timestamp": "2026-10-13T17:28:02.216511-05:00",
+        "event": "Root cause: the failure injector intentionally stopped the customer portal container. Remediation: restarted the service with docker compose start web."
+      },
+      {
+        "timestamp": "2026-10-13T17:28:02.255936-05:00",
+        "event": "Status changed: INVESTIGATING -> RESOLVED"
+      }
+    ],
+    "root_cause": null,
+    "remediation": null,
+    "resolved_at": "2026-10-13T17:28:02.255936-05:00"
+  },
+  {
+    "id": "INC-1005",
+    "title": "Customer Portal Health Check Failure",
+    "type": "health_check_failure",
+    "service": "Monitoring",
+    "severity": "SEV-2",
+    "status": "OPEN",
+    "detected_at": "2026-10-13T18:34:22.879951-05:00",
+    "detection_source": "Automated Health Monitor",
+    "symptoms": [
+      "Automated health check failed",
+      "Expected HTTP 200 response not received",
+      "Customer portal may be unavailable"
+    ],
+    "timeline": [
+      {
+        "timestamp": "2026-10-13T18:34:22.879951-05:00",
+        "event": "Incident created"
+      },
+      {
+        "timestamp": "2026-10-13T18:34:22.879951-05:00",
+        "event": "Automatically created after a failed health check."
+      }
+    ],
+    "root_cause": null,
+    "remediation": null,
+    "resolved_at": null
   }
 ]
