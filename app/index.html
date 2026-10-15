@@ -1,27 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LSFL Customer Portal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LSFL | Operations Center</title>
+<style>
+:root{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172033;background:#f4f6fa;font-size:14px}
+*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}
+button{cursor:pointer}.layout{min-height:100vh;display:grid;grid-template-columns:225px minmax(0,1fr)}
+aside{background:#101b30;color:#dce5f5;padding:25px 16px}
+.brand{display:flex;align-items:center;gap:11px;padding:0 8px 30px}
+.logo{display:grid;place-items:center;background:#3478f6;border-radius:10px;width:38px;height:38px;font-weight:800;color:white;font-size:17px}
+.brand strong{display:block;color:#fff;font-size:14px}.brand small{color:#9cacc5}
+.nav-label{font-size:10px;letter-spacing:1.5px;color:#8595af;padding:10px 12px}
+nav button{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;color:#bdc9dc;text-align:left;padding:12px;border-radius:8px;margin:3px 0}
+nav button.active,nav button:hover{background:#243653;color:#fff}
+.nav-count{margin-left:auto;background:#314866;border-radius:10px;padding:2px 7px;font-size:11px}
+.aside-bottom{margin-top:38px;padding:14px;border:1px solid #30405a;border-radius:10px;color:#c3cee0;font-size:12px;line-height:1.7}
+main{min-width:0;padding:28px 32px 50px}
+.topbar{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:27px}
+.eyebrow{font-size:11px;color:#718096;letter-spacing:1.4px;text-transform:uppercase}
+h1{font-size:27px;letter-spacing:-.7px;margin:7px 0}.subtitle{color:#718096}
+.live{display:flex;align-items:center;gap:8px;border:1px solid #dce5e0;background:white;padding:9px 12px;border-radius:20px;font-size:12px;white-space:nowrap}
+.dot{height:8px;width:8px;border-radius:50%;background:#20a464;display:inline-block}.dot.bad{background:#dc4242}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin-bottom:24px}
+.card,.panel{background:white;border:1px solid #e5e9f0;border-radius:12px;box-shadow:0 2px 6px #17203305}
+.card{padding:19px}.metric-label{color:#718096;font-size:12px}.metric-value{font-size:27px;font-weight:750;margin:13px 0 5px;letter-spacing:-.5px}.metric-foot{font-size:11px;color:#718096}
+.green{color:#138653}.amber{color:#b7791f}.red{color:#c53e46}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}
+h2{font-size:16px;margin:0}.section-sub{font-size:12px;color:#718096;margin-top:5px}
+.btn{background:#2563eb;color:white;border:0;border-radius:7px;padding:9px 13px;font-weight:600}.btn.secondary{background:white;color:#344054;border:1px solid #dce2eb}
+.panel{padding:20px;margin-bottom:22px;min-width:0}.filters{display:flex;gap:9px;flex-wrap:wrap;margin:17px 0}
+input,select{background:white;border:1px solid #dce2eb;border-radius:7px;padding:9px 11px;color:#263449}
+input{min-width:180px;flex:1}.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;white-space:nowrap}th{text-align:left;font-size:10px;letter-spacing:.7px;color:#8590a3;background:#f8fafc;padding:12px 10px;font-weight:650}
+td{padding:14px 10px;border-bottom:1px solid #edf0f5;font-size:12px}tbody tr{cursor:pointer}tbody tr:hover{background:#f7faff}
+.ticket-id{color:#2563eb;font-weight:700}.ticket-title{font-weight:650;color:#243149}.muted{color:#718096}
+.pill{display:inline-block;padding:5px 8px;border-radius:5px;font-size:10px;font-weight:750;background:#eef2f7;color:#596579}
+.pill.sev-2{background:#fff0ed;color:#bd4037}.pill.sev-3{background:#fff6df;color:#976411}
+.pill.open{background:#fff6df;color:#976411}.pill.investigating{background:#eaf1ff;color:#285fc0}.pill.resolved,.pill.closed{background:#e5f7ee;color:#16734a}.pill.mitigated{background:#e5f3ff;color:#2563a6}
+.lower{display:grid;grid-template-columns:1.1fr 1fr;gap:20px}.activity{border-left:2px solid #e4eaf2;margin:18px 0 4px 6px;padding-left:19px}
+.event{position:relative;margin-bottom:20px}.event:before{content:"";position:absolute;left:-25px;top:4px;width:9px;height:9px;border:2px solid white;border-radius:50%;background:#4380f5;box-shadow:0 0 0 1px #4380f5}
+.event strong{font-size:12px}.event p{margin:5px 0;color:#718096;font-size:12px;line-height:1.5}
+.doc-list{display:grid;gap:8px;margin-top:16px}.doc-link{display:flex;align-items:center;gap:11px;padding:12px;border:1px solid #edf0f5;border-radius:8px;background:white;text-align:left}
+.doc-link:hover{border-color:#9cbcfb;background:#f7faff}.doc-icon{background:#edf3ff;color:#3168c8;border-radius:7px;padding:9px}
+.doc-link strong{display:block;font-size:12px}.doc-link small{color:#718096;font-size:11px}
+footer{text-align:center;color:#8a95a7;font-size:11px;padding:10px}
+.overlay{position:fixed;inset:0;background:#10182780;display:none;align-items:center;justify-content:center;padding:18px;z-index:5}
+.modal{background:white;width:min(720px,100%);max-height:88vh;overflow:auto;border-radius:14px;padding:25px;box-shadow:0 20px 70px #0003}
+.modal-head{display:flex;justify-content:space-between;gap:15px;align-items:start}.close{border:0;background:#edf1f7;border-radius:7px;padding:8px 12px}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.detail-box{padding:14px;border:1px solid #e6eaf0;border-radius:9px;min-width:0}
+.detail-box small{color:#718096;display:block;margin-bottom:8px}.detail-box div{overflow-wrap:anywhere}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f7f9fc;padding:18px;border-radius:8px;font:12px/1.7 ui-monospace,monospace}
+@media(max-width:1000px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.lower{grid-template-columns:1fr}}
+@media(max-width:650px){.layout{grid-template-columns:1fr}aside{padding:12px} .brand{padding-bottom:12px}nav{display:flex;overflow:auto}nav button{min-width:max-content;width:auto}.nav-label,.aside-bottom{display:none}main{padding:20px 13px}.topbar{align-items:flex-start}.live{font-size:0}.live .dot{font-size:12px}.metrics{gap:9px}.card{padding:13px}.metric-value{font-size:23px}.panel{padding:14px}.detail-grid{grid-template-columns:1fr 1fr}}
+
+.arch-diagram{margin:24px 0;padding:clamp(14px,3vw,28px);border:1px solid #26364d;border-radius:16px;background:linear-gradient(155deg,#0b1424,#111e32);color:#e8eef8;display:flex;flex-direction:column;align-items:center;gap:0;overflow:hidden}
+.arch-node{width:100%;max-width:540px;box-sizing:border-box;padding:18px 20px;border:1px solid #344762;border-radius:12px;background:#17263a;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;box-shadow:0 5px 18px #0002}
+.arch-node strong,.arch-ops strong{font-size:14px;letter-spacing:.045em}
+.arch-node small{font-size:12px;line-height:1.6;color:#b7c5d8}
+.arch-kicker{font-size:10px;letter-spacing:.13em;font-weight:700;color:#8ea9ca}
+.arch-client{border-color:#64748b}
+.arch-web{border-color:#3b82f6;background:#132b49}
+.arch-api{border-color:#8b5cf6;background:#241c42}
+.arch-data{border-color:#10b981;background:#102e2c;flex:1;min-width:0}
+.arch-connector{display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 4px;color:#8db9ff}
+.arch-connector span{font-size:9px;letter-spacing:.1em;text-align:center;font-weight:700}
+.arch-connector b{font-size:24px;line-height:1}
+.arch-branches{display:flex;gap:12px;width:100%;max-width:700px;align-items:stretch}
+.arch-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:4px}
+.arch-tags span{font-size:11px;padding:6px 9px;border:1px solid #405575;border-radius:6px;background:#101a2a;color:#d8e6fa}
+.arch-ops{box-sizing:border-box;width:100%;max-width:700px;margin-top:22px;padding:18px;border:1px solid #3c6b63;border-radius:12px;background:#112b2b;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+.arch-ops .arch-kicker{color:#6ee7b7}
+.arch-note{width:100%;max-width:700px;margin:18px 0 0;text-align:center;font-size:11px;line-height:1.7;color:#9eacc0}
+@media(max-width:520px){.arch-branches{flex-direction:column}.arch-node{padding:15px 10px}.arch-node strong,.arch-ops strong{font-size:12px}.arch-tags span{font-size:10px}}
+\n</style>
 </head>
-
 <body>
-    <h1>Lone Star Fulfillment & Logistics</h1>
-
-    <h2>Customer Portal</h2>
-
-    <p>Welcome to the LSFL customer portal.</p>
-
-    <p>Customers can use this system to:</p>
-
-    <ul>
-        <li>Place orders</li>
-        <li>Track shipments</li>
-        <li>Check order status</li>
-        <li>View delivery information</li>
-    </ul>
-
-    <p>System Status: <strong>Operational</strong></p>
+<div class="layout">
+<aside>
+  <div class="brand"><div class="logo">LS</div><div><strong>LSFL OPERATIONS</strong><small>Fulfillment & Logistics</small></div></div>
+  <div class="nav-label">WORKSPACE</div>
+  <nav>
+    <button class="active" data-view="overview">▦ &nbsp; Overview</button>
+    <button data-view="incidents">▤ &nbsp; Incident Queue <span id="nav-count" class="nav-count">—</span></button>
+    <button data-view="health">◉ &nbsp; Service Health</button>
+    <button data-view="docs">▧ &nbsp; Documentation</button>
+  </nav>
+  <div class="aside-bottom">PRODUCTION SIMULATION<br><span class="dot"></span> Monitoring enabled<br><br>Docker · Incident response · Recovery</div>
+</aside>
+<main>
+  <div class="topbar"><div><div class="eyebrow">IT Operations / Customer Portal</div><h1 id="page-title">Operations Center</h1><div class="subtitle">Service reliability and incident management</div></div><div class="live"><span id="live-dot" class="dot"></span><span id="live-text">Checking service…</span></div></div>
+  <section id="overview">
+    <div class="metrics">
+      <div class="card"><div class="metric-label">CUSTOMER PORTAL</div><div class="metric-value green" id="portal-status">Checking…</div><div class="metric-foot" id="portal-code">HTTP —</div></div>
+      <div class="card"><div class="metric-label">OPEN INCIDENTS</div><div class="metric-value" id="open-count">—</div><div class="metric-foot">Awaiting resolution</div></div>
+      <div class="card"><div class="metric-label">TOTAL TICKETS</div><div class="metric-value" id="total-count">—</div><div class="metric-foot">Loaded from incident records</div></div>
+      <div class="card"><div class="metric-label">RESOLVED / CLOSED</div><div class="metric-value green" id="resolved-count">—</div><div class="metric-foot">Completed incident records</div></div>
+    </div>
+    <div class="panel">
+      <div class="section-head"><div><h2>Incident Queue</h2><div class="section-sub">Select any incident to inspect its details and timeline.</div></div><button class="btn secondary" onclick="loadAll()">↻ Refresh</button></div>
+      <div class="filters"><input id="search" placeholder="Search ID, incident, or service…" oninput="renderTickets()"><select id="status-filter" onchange="renderTickets()"><option value="">All statuses</option><option>OPEN</option><option>INVESTIGATING</option><option>MITIGATED</option><option>RESOLVED</option><option>CLOSED</option></select><select id="severity-filter" onchange="renderTickets()"><option value="">All severities</option><option>SEV-1</option><option>SEV-2</option><option>SEV-3</option><option>SEV-4</option></select></div>
+      <div class="table-wrap"><table><thead><tr><th>INCIDENT</th><th>SEVERITY</th><th>SERVICE</th><th>STATUS</th><th>DETECTED</th></tr></thead><tbody id="ticket-rows"><tr><td colspan="5">Loading incident records…</td></tr></tbody></table></div>
+      <div class="section-sub" id="ticket-summary"></div>
+    </div>
+    <div class="lower">
+      <div class="panel"><h2>Service Health</h2><div class="section-sub">Live HTTP check against the customer portal.</div><div class="activity"><div class="event"><strong id="health-event-title">Checking service</strong><p id="health-event-copy">Waiting for the first health response.</p></div><div class="event"><strong>Container health check</strong><p>Docker Compose runs a container-level check against NGINX.</p></div><div class="event"><strong>Incident monitoring</strong><p>Use the existing Python monitoring scripts to detect and record simulated failures.</p></div></div><button class="btn secondary" onclick="checkHealth()">Run health check now</button></div>
+      <div class="panel"><h2>Documentation Library</h2><div class="section-sub">Runbooks, postmortems, architecture, and test evidence.</div><div id="doc-list" class="doc-list">Loading documentation…</div><button style="margin-top:13px" class="btn secondary" onclick="showView('docs')">Browse all documents →</button></div>
+    </div>
+  </section>
+  <section id="incidents" hidden><div class="panel"><div class="section-head"><div><h2>Incident Management</h2><div class="section-sub">Search and inspect recorded incident tickets.</div></div></div><div class="section-sub">Use the filters in the Overview tab to narrow down tickets, or select an incident row to open its record.</div><div id="incident-list" class="doc-list"></div></div></section>
+  <section id="health" hidden><div class="panel"><div class="section-head"><div><h2>Service Health</h2><button class="btn" onclick="checkHealth()">Check now</button></div></div><div class="metrics"><div class="card"><div class="metric-label">HTTP STATUS</div><div class="metric-value" id="health-code-large">—</div></div><div class="card"><div class="metric-label">SERVICE</div><div class="metric-value" id="health-large">—</div></div></div><p class="subtitle">This page reports the actual HTTP response from the running portal, not a hardcoded status.</p></div></section>
+  <section id="docs" hidden><div class="panel"><h2>Documentation Library</h2><div class="section-sub">Select a file to read it here.</div><div id="all-docs" class="doc-list">Loading…</div><div id="doc-content"></div></div></section>
+  <footer>LSFL · Production Operations Simulation · Docker / NGINX / Python</footer>
+</main>
+</div>
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()"><div class="modal"><div class="modal-head"><div><div class="eyebrow" id="modal-id">INCIDENT</div><h2 id="modal-title" style="margin:8px 0"></h2></div><button class="close" onclick="closeModal()">Close ✕</button></div><div id="modal-body"></div></div></div>
+<script>
+let tickets=[],documents=[],health={};
+const $=id=>document.getElementById(id);
+const pick=(o,keys,fallback="—")=>{for(const k of keys){if(o&&o[k]!==undefined&&o[k]!==null&&o[k]!=="")return o[k]}return fallback};
+const ticketId=t=>pick(t,["id","incident_id","ticket_id","number"]);
+const title=t=>pick(t,["title","incident_title","name","summary","issue_type"],"Untitled incident");
+const severity=t=>String(pick(t,["severity","priority"],"Unassigned")).toUpperCase();
+const status=t=>String(pick(t,["status","state"],"OPEN")).toUpperCase();
+const service=t=>pick(t,["service","affected_service","system"]);
+const detected=t=>pick(t,["detected_at","created_at","timestamp"]);
+function dateText(v){if(!v||v==="—")return "—";const d=new Date(v);return isNaN(d)?String(v):d.toLocaleString()}
+function pill(text,extra=""){return `<span class="pill ${extra||String(text).toLowerCase().replace(/[^a-z0-9]+/g,'-')}">${esc(text)}</span>`}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+async function api(url){const r=await fetch(url,{cache:"no-store"});if(!r.ok)throw Error(`Request failed (${r.status})`);return r.json()}
+async function loadAll(){
+  try{const d=await api("/api/tickets");tickets=Array.isArray(d)?d:(d.tickets||d.incidents||[]);$("total-count").textContent=tickets.length;
+    $("open-count").textContent=tickets.filter(t=>["OPEN","INVESTIGATING","MITIGATED"].includes(status(t))).length;
+    $("resolved-count").textContent=tickets.filter(t=>["RESOLVED","CLOSED"].includes(status(t))).length;
+    $("nav-count").textContent=tickets.length;renderTickets();renderIncidentList();
+  }catch(e){$("ticket-rows").innerHTML=`<tr><td colspan="5">Unable to load tickets: ${esc(e.message)}</td></tr>`}
+  await Promise.all([checkHealth(),loadDocs()]);
+}
+function renderTickets(){
+ const q=$("search").value.toLowerCase(),s=$("status-filter").value,v=$("severity-filter").value;
+ const rows=tickets.filter(t=>(!s||status(t)===s)&&(!v||severity(t)===v)&&[ticketId(t),title(t),service(t),severity(t),status(t)].join(" ").toLowerCase().includes(q));
+ $("ticket-rows").innerHTML=rows.length?rows.map((t)=>`<tr onclick="openTicket('${esc(ticketId(t))}')"><td><span class="ticket-id">${esc(ticketId(t))}</span><br><span class="ticket-title">${esc(title(t))}</span></td><td>${pill(severity(t),severity(t).toLowerCase().replace("-","-"))}</td><td>${esc(service(t))}</td><td>${pill(status(t))}</td><td>${esc(dateText(detected(t)))}</td></tr>`).join(""):`<tr><td colspan="5" class="muted">No matching tickets found.</td></tr>`;
+ $("ticket-summary").textContent=`Showing ${rows.length} of ${tickets.length} recorded incidents`;
+}
+function renderIncidentList(){$("incident-list").innerHTML=tickets.map(t=>`<button class="doc-link" onclick="openTicket('${esc(ticketId(t))}')"><span class="doc-icon">▤</span><span><strong>${esc(ticketId(t))} · ${esc(title(t))}</strong><small>${esc(severity(t))} · ${esc(service(t))} · ${esc(status(t))}</small></span></button>`).join("")||"No tickets found."}
+function openTicket(id){
+ const t=tickets.find(x=>String(ticketId(x))===String(id));if(!t)return;
+ $("modal-id").textContent=`${ticketId(t)} · ${severity(t)}`;$("modal-title").textContent=title(t);
+ const timeline=pick(t,["timeline","events","history"],[]);
+ const lines=Array.isArray(timeline)?timeline.map(e=>typeof e==="string"?e:JSON.stringify(e)).join("\n\n"):String(timeline||"No timeline events recorded.");
+ $("modal-body").innerHTML=`<div class="detail-grid">
+ <div class="detail-box"><small>STATUS</small><div>${pill(status(t))}</div></div>
+ <div class="detail-box"><small>AFFECTED SERVICE</small><div>${esc(service(t))}</div></div>
+ <div class="detail-box"><small>DETECTED AT</small><div>${esc(dateText(detected(t)))}</div></div>
+ <div class="detail-box"><small>DETECTION SOURCE</small><div>${esc(pick(t,["detection_source","source"]))}</div></div>
+ <div class="detail-box"><small>ROOT CAUSE</small><div>${esc(pick(t,["root_cause","cause"],"Not recorded"))}</div></div>
+ <div class="detail-box"><small>REMEDIATION</small><div>${esc(pick(t,["remediation","resolution"],"Not recorded"))}</div></div>
+ </div><h3>Description / Symptoms</h3><p>${esc(pick(t,["description","symptoms","details"],"No description recorded."))}</p><h3>Incident Timeline</h3><pre>${esc(lines)}</pre>`;
+ $("overlay").style.display="flex";
+}
+function closeModal(){$("overlay").style.display="none"}
+async function checkHealth(){
+ try{health=await api("/api/health");const ok=health.status==="healthy";$("portal-status").textContent=ok?"Healthy":"Unhealthy";$("portal-status").className="metric-value "+(ok?"green":"red");$("portal-code").textContent=`HTTP ${health.http_code}`;
+ $("live-dot").className="dot"+(ok?"":" bad");$("live-text").textContent=ok?"Monitoring active":"Service unavailable";$("health-event-title").textContent=ok?"Portal responding normally":"Portal health check failed";$("health-event-copy").textContent=`Last check: ${new Date().toLocaleTimeString()} · HTTP ${health.http_code}`;$("health-code-large").textContent=health.http_code;$("health-large").textContent=ok?"Healthy":"Unhealthy";$("health-large").className="metric-value "+(ok?"green":"red");
+ }catch(e){$("portal-status").textContent="Unknown";$("portal-code").textContent="Health API unavailable";$("live-text").textContent="Monitoring unavailable"}
+}
+async function loadDocs(){
+ try{const d=await api("/api/docs");documents=d.documents||[];const make=x=>`<button class="doc-link" onclick="openDoc('${esc(x.path)}')"><span class="doc-icon">▧</span><span><strong>${esc(x.title)}</strong><small>${esc(x.category)} · Markdown document</small></span></button>`;
+ $("doc-list").innerHTML=documents.slice(0,5).map(make).join("")||"No documents found.";
+ $("all-docs").innerHTML=documents.map(make).join("")||"No documents found.";
+ }catch(e){$("doc-list").textContent="Unable to load documentation."; $("all-docs").textContent="Unable to load documentation."}
+}
+async function openDoc(path){
+ showView("docs");$("doc-content").innerHTML="<p>Loading document…</p>";
+ try{const d=await api("/api/docs?file="+encodeURIComponent(path));const isArchitecture=/architecture\.md$/i.test(d.path);
+const body=isArchitecture?`<div class="arch-diagram">
+  <div class="arch-node arch-client"><span class="arch-kicker">ENTRY POINT</span><strong>USER / BROWSER</strong><small>Customer portal dashboard</small></div>
+  <div class="arch-connector"><span>HTTP · PORT 8080</span><b>↓</b></div>
+  <div class="arch-node arch-web"><span class="arch-kicker">DOCKER CONTAINER 01</span><strong>NGINX WEB SERVER</strong><small>Serves app/index.html · Routes /api/ requests</small></div>
+  <div class="arch-connector"><span>REVERSE PROXY · INTERNAL PORT 8000</span><b>↓</b></div>
+  <div class="arch-node arch-api"><span class="arch-kicker">DOCKER CONTAINER 02</span><strong>PYTHON OPERATIONS API</strong><div class="arch-tags"><span>/api/health</span><span>/api/tickets</span><span>/api/docs</span></div></div>
+  <div class="arch-connector"><span>READS DATA AND DOCUMENTATION</span><b>↓</b></div>
+  <div class="arch-branches">
+    <div class="arch-node arch-data"><strong>JSON TICKET RECORDS</strong><small>Incident data · Ticket status · Timeline</small></div>
+    <div class="arch-node arch-data"><strong>DOCUMENTATION LIBRARY</strong><small>Runbooks · Postmortems · Evidence</small></div>
+  </div>
+  <div class="arch-ops">
+    <span class="arch-kicker">OPERATIONS TOOLING</span>
+    <strong>MONITOR · DETECT · RESPOND · RECOVER</strong>
+    <div class="arch-tags"><span>Health checks</span><span>Incident engine</span><span>Failure injection</span><span>Recovery procedures</span></div>
+  </div>
+  <p class="arch-note">Scope note: payment processing, inventory services, and a dedicated order-processing backend are not implemented.</p>
+</div>`:`<pre>${esc(d.content)}</pre>`;
+$("doc-content").innerHTML=`<h2 style="margin-top:24px">${esc(d.title)}</h2><div class="section-sub">${esc(d.path)}</div>${body}`}
+ catch(e){$("doc-content").textContent="Could not load this document."}
+}
+function showView(view){
+ ["overview","incidents","health","docs"].forEach(id=>$(id).hidden=id!==view);
+ document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===view));
+ $("page-title").textContent=({overview:"Operations Center",incidents:"Incident Management",health:"Service Health",docs:"Documentation Library"})[view];
+}
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
+loadAll();setInterval(checkHealth,15000);setInterval(loadAll,60000);
+</script>
 </body>
 </html>

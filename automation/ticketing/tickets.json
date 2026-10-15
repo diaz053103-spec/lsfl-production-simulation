@@ -5,7 +5,7 @@
     "type": "high_cpu",
     "service": "Linux Host",
     "severity": "SEV-3",
-    "status": "OPEN",
+    "status": "RESOLVED",
     "detected_at": "2026-10-07T16:32:26.581582-05:00",
     "detection_source": "Incident Simulator",
     "symptoms": [
@@ -13,10 +13,19 @@
       "System response time degraded",
       "One or more processes consuming excessive CPU"
     ],
-    "timeline": [],
+    "timeline": [
+      {
+        "timestamp": "2026-10-15T16:35:51.932215-05:00",
+        "event": "Status changed: OPEN -> RESOLVED"
+      },
+      {
+        "timestamp": "2026-10-15T16:35:51.972545-05:00",
+        "event": "Resolved: controlled high-CPU workload completed and cleanup was verified; see automation/failures/evidence/high-cpu-test.md."
+      }
+    ],
     "root_cause": null,
     "remediation": null,
-    "resolved_at": null
+    "resolved_at": "2026-10-15T16:35:51.932215-05:00"
   },
   {
     "id": "INC-1002",
@@ -24,7 +33,7 @@
     "type": "container_failure",
     "service": "Customer Portal",
     "severity": "SEV-2",
-    "status": "OPEN",
+    "status": "RESOLVED",
     "detected_at": "2026-10-07T16:32:48.919749-05:00",
     "detection_source": "Incident Simulator",
     "symptoms": [
@@ -32,10 +41,19 @@
       "HTTP connection failure",
       "Container is not running"
     ],
-    "timeline": [],
+    "timeline": [
+      {
+        "timestamp": "2026-10-15T16:34:20.320646-05:00",
+        "event": "Status changed: OPEN -> RESOLVED"
+      },
+      {
+        "timestamp": "2026-10-15T16:34:20.361371-05:00",
+        "event": "Container recovery verified; portal is healthy on HTTP 200."
+      }
+    ],
     "root_cause": null,
     "remediation": null,
-    "resolved_at": null
+    "resolved_at": "2026-10-15T16:34:20.320646-05:00"
   },
   {
     "id": "INC-1003",
@@ -127,7 +145,7 @@
     "type": "health_check_failure",
     "service": "Monitoring",
     "severity": "SEV-2",
-    "status": "OPEN",
+    "status": "RESOLVED",
     "detected_at": "2026-10-13T18:34:22.879951-05:00",
     "detection_source": "Automated Health Monitor",
     "symptoms": [
@@ -143,10 +161,18 @@
       {
         "timestamp": "2026-10-13T18:34:22.879951-05:00",
         "event": "Automatically created after a failed health check."
+      },
+      {
+        "timestamp": "2026-10-15T16:34:20.401809-05:00",
+        "event": "Status changed: OPEN -> RESOLVED"
+      },
+      {
+        "timestamp": "2026-10-15T16:34:20.442500-05:00",
+        "event": "Recovery verified by successful portal health check (HTTP 200)."
       }
     ],
     "root_cause": null,
     "remediation": null,
-    "resolved_at": null
+    "resolved_at": "2026-10-15T16:34:20.401809-05:00"
   }
 ]
