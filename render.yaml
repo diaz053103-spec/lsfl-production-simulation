@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: lsfl-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./api/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/tickets
+    envVars:
+      - key: PORT
+        value: "10000"
+
+  - type: web
+    name: lsfl-dashboard
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: "10000"
+      - key: API_HOSTPORT
+        fromService:
+          type: web
+          name: lsfl-api
+          property: hostport
