@@ -1,6 +1,4 @@
 FROM nginx:alpine
-
 COPY app/ /usr/share/nginx/html/
 COPY nginx/default.conf.template /etc/nginx/templates/default.conf.template
-
-EXPOSE 80
+EXPOSE 10000

@@ -7,5 +7,5 @@ COPY docs/ /docs/
 COPY runbooks/ /runbooks/
 COPY postmortems/ /postmortems/
 COPY automation/failures/evidence/ /evidence/
-EXPOSE 8000
+EXPOSE 10000
 CMD ["python", "-u", "/app/server.py"]

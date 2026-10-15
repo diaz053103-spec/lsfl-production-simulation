@@ -115,4 +115,4 @@ class Handler(BaseHTTPRequestHandler):
         print("[LSFL API]", fmt % args)
 
 print("LSFL API listening on port 8000")
-ThreadingHTTPServer(("0.0.0.0", int(os.environ.get("PORT", "8000"))), Handler).serve_forever()
+ThreadingHTTPServer(("0.0.0.0", int(os.environ.get("PORT", "10000"))), Handler).serve_forever()
