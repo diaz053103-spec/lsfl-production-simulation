@@ -9,6 +9,8 @@ services:
     envVars:
       - key: PORT
         value: "10000"
+      - key: PORTAL_HEALTH_URL
+        value: https://lsfl-dashboard.onrender.com/
 
   - type: web
     name: lsfl-dashboard
