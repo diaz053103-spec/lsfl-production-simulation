@@ -79,7 +79,12 @@ class Handler(BaseHTTPRequestHandler):
                     "http_code": code,
                     "service": "LSFL Customer Portal",
                 })
-            except Exception:
+            except Exception as exc:
+                print(
+                    f"[LSFL API] Portal health probe failed: "
+                    f"{type(exc).__name__}: {exc}",
+                    flush=True,
+                )
                 return self.send_json({
                     "status": "unhealthy",
                     "http_code": 0,
