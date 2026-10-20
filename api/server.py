@@ -67,29 +67,10 @@ class Handler(BaseHTTPRequestHandler):
             return self.send_json({"tickets": tickets})
 
         if parsed.path == "/api/health":
-            try:
-                req = urllib.request.Request(
-                    os.environ.get("PORTAL_HEALTH_URL", "http://web/"),
-                    headers={"User-Agent": "LSFL-Operations-Monitor"}
-                )
-                with urllib.request.urlopen(req, timeout=3) as response:
-                    code = response.status
-                return self.send_json({
-                    "status": "healthy" if code == 200 else "unhealthy",
-                    "http_code": code,
-                    "service": "LSFL Customer Portal",
-                })
-            except Exception as exc:
-                print(
-                    f"[LSFL API] Portal health probe failed: "
-                    f"{type(exc).__name__}: {exc}",
-                    flush=True,
-                )
-                return self.send_json({
-                    "status": "unhealthy",
-                    "http_code": 0,
-                    "service": "LSFL Customer Portal",
-                })
+            return self.send_json({
+                "status": "healthy",
+                "service": "LSFL API",
+            })
 
         if parsed.path == "/api/docs":
             requested = params.get("file", [None])[0]
